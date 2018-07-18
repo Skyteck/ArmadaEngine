@@ -108,7 +108,7 @@ namespace ArmadaEngine.TileMaps
                         walkable = false;
                     }
 
-                    Tile newTile = new Tile(tileset, tilePos, tileWidth, tileHeight, column, row, true, new Vector2(tileX, tileY), walkable);
+                    Tile newTile = new Tile(tileset, tilePos, tileWidth, tileHeight, column, row, true, new Vector2(tileX, tileY), walkable, this);
                     backgroundTiles.Add(newTile);
                 }
             }

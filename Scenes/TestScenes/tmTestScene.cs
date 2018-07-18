@@ -35,6 +35,17 @@ namespace ArmadaEngine
             rectTex = Content.Load<Texture2D>(@"Art/edgeTex");
         }
 
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            _MapManager = null;
+            path = null;
+            TileOne = null;
+            TileTwo = null;
+            rectTex = null;
+            tileRect = Rectangle.Empty;
+        }
+
         public override void Update(GameTime gt)
         {
             base.Update(gt);
@@ -67,7 +78,7 @@ namespace ArmadaEngine
                 }
             }
 
-            if (InputHelper.IsKeyPressed(Keys.Space))
+            if (InputHelper.IsKeyPressed(Keys.T))
             {
                 diagonalPaths = !diagonalPaths;
 

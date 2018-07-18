@@ -28,7 +28,7 @@ namespace ArmadaEngine.Scenes
 
         public virtual void UnloadContent()
         {
-            
+
         }
 
         public virtual void Update(GameTime gt)

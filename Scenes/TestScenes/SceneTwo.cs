@@ -12,7 +12,7 @@ namespace ArmadaEngine
 {
     class SceneTwo : Scenes.Scene
     {
-        Sprite tester = new Sprite();
+        Sprite tester;
         public SceneTwo(ContentManager c, Scenes.SceneManager sm) : base(c, sm)
         {
             this._Name = "Scene Two";
@@ -21,8 +21,15 @@ namespace ArmadaEngine
         public override void LoadContent()
         {
             base.LoadContent();
+            tester = new Sprite();
             tester.LoadContent("Art/testAgain", Content);
             tester._Position = new Vector2(100, 100);
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            tester = null;
         }
 
         public override void Update(GameTime gt)
@@ -31,6 +38,7 @@ namespace ArmadaEngine
             if(Helpers.InputHelper.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.D2))
             {
                 _SM.ActivateScene("Test Scene");
+                return;
             }
             tester.Update(gt);
         }

@@ -30,7 +30,7 @@ namespace ArmadaEngine
         public override void LoadContent()
         {
             base.LoadContent();
-
+            rectList = new List<Rectangle>();
             testGuy = new Player();
 
             testGuy.LoadContent(@"Art/Player", Content);
@@ -39,6 +39,14 @@ namespace ArmadaEngine
             _MapManager = new TilemapManager();
             _MapManager.LoadMap("MegaLevel", Content);
             LoadCollision(_MapManager.findMapByName("MegaLevel"));
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            _MapManager = null;
+            testGuy = null;
+            rectList = null;
         }
 
         private void LoadCollision(TileMap theMap)

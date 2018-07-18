@@ -116,6 +116,8 @@ namespace ArmadaEngine.TileMaps
 
             return adjacentTiles;
         }
+        
+
 
         public List<Tile> AStarTwo(Tile tileOne, Tile tileTwo, bool useDiagonal = false)
         {
@@ -260,6 +262,10 @@ namespace ArmadaEngine.TileMaps
             return closest;
         }
 
+        public List<Tile> getAllTiles(TileMap map)
+        {
+            return map.backgroundTiles;
+        }
 
         public Vector2 PosToWorldTilePos(Vector2 pos)
         {
@@ -306,13 +312,30 @@ namespace ArmadaEngine.TileMaps
 
     public class Node
     {
-        Tile myTile;
-        float EstCost;
-
-        public Node(Tile one, Tile two)
+        public Tile myTile;
+        public Tile _one;
+        public Tile _two;
+        public float toStartCost;
+        public float toGoalCost;
+        public Tile closestTile;
+        public bool open;
+        public List<Node> neighbors = new List<Node>();
+        public Node(Tile myTile, Tile two, Tile one)
         {
-            myTile = one;
-            EstCost = Vector2.Distance(myTile.tileCenter, two.tileCenter);
+            this.myTile = myTile;
+            toGoalCost = Vector2.Distance(myTile.tileCenter, two.tileCenter);
+            toStartCost = Vector2.Distance(myTile.tileCenter, one.tileCenter);
+            
+        }
+
+        public void SetNeighbors(List<Tile> n)
+        {
+            neighbors.Clear();
+            foreach(Tile t in n)
+            {
+                Node nn = new Node(t, _two, _one);
+                neighbors.Add(nn);
+            }
         }
     }
 }

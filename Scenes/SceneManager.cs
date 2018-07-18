@@ -44,6 +44,7 @@ namespace ArmadaEngine.Scenes
                     {
                         _ActiveScene._Active = false;
                         _PreviousScene = _ActiveScene;
+                        _PreviousScene.UnloadContent();
                     }
                     t._Active = true;
                     t.LoadContent();

@@ -28,7 +28,9 @@ namespace ArmadaEngine.TileMaps
 
         public Vector2 localPos;
 
-        public Tile(Texture2D texture, Vector2 Pos, int width, int height, int col, int row, bool draw, Vector2 tilemapPos, bool walkOn)
+        public TileMap myMap;
+
+        public Tile(Texture2D texture, Vector2 Pos, int width, int height, int col, int row, bool draw, Vector2 tilemapPos, bool walkOn, TileMap m)
         {
             _Texture = texture;
             _Position = Pos;
@@ -45,6 +47,7 @@ namespace ArmadaEngine.TileMaps
             tileCenter.Y = this._Position.Y + this._TileHeight / 2;
 
             walkable = walkOn;
+            myMap = m;
         }
 
         public void Update(GameTime gameTime)
