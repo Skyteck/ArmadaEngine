@@ -26,13 +26,13 @@ namespace ArmadaEngine.GameObjects
         public int frameHeight;
         public bool _FlipX = false;
         public bool _FlipY = false;
-        public float _zOrder;
         public Vector2 _Scale = new Vector2(1, 1);
         public Color _MyColor = Color.White;
         public float _Rotation = 0.0f;
         public float _Opacity = 1.0f;
         public string Name;
         public bool _IsMoving = false;
+        public float _ZOrder = 0f;
 
         ////Collision helper:
         //List<Sprite> corners;
@@ -197,19 +197,19 @@ namespace ArmadaEngine.GameObjects
                 //Rectangle sr = new Rectangle((frameWidth * frameNum), (frameHeight * StateNum), frameWidth, frameHeight);
                 if (!_FlipX && !_FlipY)
                 {
-                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.None, _ZOrder);
                 }
                 else if (_FlipX)
                 {
-                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.FlipHorizontally, 0f);
+                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.FlipHorizontally, _ZOrder);
                 }
                 else if (_FlipY)
                 {
-                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.FlipVertically, 0f);
+                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), _Rotation, _Center, _Scale, SpriteEffects.FlipVertically, _ZOrder);
                 }
                 else if (_FlipX && _FlipY)
                 {
-                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), (_Rotation + (float)Math.PI), _Center, _Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(_Texture, _Position, sr, new Color(_MyColor, _Opacity), (_Rotation + (float)Math.PI), _Center, _Scale, SpriteEffects.None, _ZOrder);
                 }
 
                 if (_ChildrenList != null)

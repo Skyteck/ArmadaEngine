@@ -9,7 +9,7 @@ using ArmadaEngine.TileMaps;
 using ArmadaEngine.Helpers;
 using Microsoft.Xna.Framework.Input;
 
-namespace ArmadaEngine
+namespace ArmadaEngine.Scenes.TestScenes
 {
     class tmTestScene : Scenes.Scene
     {
@@ -22,7 +22,7 @@ namespace ArmadaEngine
         Rectangle tileRect;
         bool diagonalPaths = false;
 
-        public tmTestScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm) : base(c, sm)
+        public tmTestScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
         {
             _Name = "TmTest";
         }
@@ -31,8 +31,8 @@ namespace ArmadaEngine
         {
             base.LoadContent();
             _MapManager = new TilemapManager();
-            _MapManager.LoadMap("ProtoLevel", Content);
-            rectTex = Content.Load<Texture2D>(@"Art/edgeTex");
+            _MapManager.LoadMap("ProtoLevel", _Content);
+            rectTex = _Content.Load<Texture2D>(@"Art/edgeTex");
         }
 
         public override void UnloadContent()

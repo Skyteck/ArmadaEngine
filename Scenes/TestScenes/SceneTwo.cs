@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmadaEngine
+namespace ArmadaEngine.Scenes.TestScenes
 {
     class SceneTwo : Scenes.Scene
     {
         Sprite tester;
-        public SceneTwo(ContentManager c, Scenes.SceneManager sm) : base(c, sm)
+        public SceneTwo(ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
         {
             this._Name = "Scene Two";
 
@@ -22,7 +22,7 @@ namespace ArmadaEngine
         {
             base.LoadContent();
             tester = new Sprite();
-            tester.LoadContent("Art/testAgain", Content);
+            tester.LoadContent("Art/testAgain", _Content);
             tester._Position = new Vector2(100, 100);
         }
 

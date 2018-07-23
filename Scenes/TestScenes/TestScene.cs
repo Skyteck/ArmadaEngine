@@ -8,12 +8,12 @@ using ArmadaEngine.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ArmadaEngine
+namespace ArmadaEngine.Scenes.TestScenes
 {
     class TestScene : ArmadaEngine.Scenes.Scene
     {
         Sprite tester;
-        public TestScene(ContentManager c, Scenes.SceneManager sm) : base(c, sm)
+        public TestScene(ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
         {
             this._Name = "Test Scene";
         }
@@ -22,7 +22,7 @@ namespace ArmadaEngine
         {
             base.LoadContent();
             tester = new Sprite();
-            tester.LoadContent("Art/test", Content);
+            tester.LoadContent("Art/test", _Content);
             tester._Position = new Vector2(100, 100);
         }
 

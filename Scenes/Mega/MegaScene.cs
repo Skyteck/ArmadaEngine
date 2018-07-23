@@ -10,7 +10,7 @@ using ArmadaEngine.Helpers;
 using Microsoft.Xna.Framework.Input;
 using TiledSharp;
 
-namespace ArmadaEngine
+namespace ArmadaEngine.Scenes.Mega
 {
     class MegaScene : Scenes.Scene
     {
@@ -21,8 +21,8 @@ namespace ArmadaEngine
         
 
         FPSCounter fps = new FPSCounter();
-
-        public MegaScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm) : base(c, sm)
+        
+        public MegaScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
         {
             _Name = "Mega";
         }
@@ -33,11 +33,11 @@ namespace ArmadaEngine
             rectList = new List<Rectangle>();
             testGuy = new Player();
 
-            testGuy.LoadContent(@"Art/Player", Content);
+            testGuy.LoadContent(@"Art/Player", _Content);
             testGuy._Position = new Vector2(200, 0);
 
             _MapManager = new TilemapManager();
-            _MapManager.LoadMap("MegaLevel", Content);
+            _MapManager.LoadMap("MegaLevel", _Content);
             LoadCollision(_MapManager.findMapByName("MegaLevel"));
         }
 
@@ -66,6 +66,8 @@ namespace ArmadaEngine
         {
             base.Update(gt);
             testGuy.UpdateActive(gt, rectList);
+
+            _Camera._Position = testGuy._Position;
         }
 
         public override void Draw(SpriteBatch sb, Rectangle bounds)

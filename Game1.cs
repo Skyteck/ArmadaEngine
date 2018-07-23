@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ArmadaEngine.Camera;
+using ArmadaEngine.Scenes.TestScenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +14,7 @@ namespace ArmadaEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Scenes.SceneManager _SM = new Scenes.SceneManager();
+        TestCamera _Camera;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -41,19 +44,29 @@ namespace ArmadaEngine
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            _Camera = new TestCamera(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            TestScene ts = new TestScene(Content, _SM);
-            _SM.AddScene(ts);
-            _SM.ActivateScene("Test Scene");
+            //TestScene ts = new TestScene(Content, _SM, _Camera);
+            //_SM.AddScene(ts);
 
-            SceneTwo st = new SceneTwo(Content, _SM);
-            _SM.AddScene(st);
+            //SceneTwo st = new SceneTwo(Content, _SM, _Camera);
+            //_SM.AddScene(st);
 
-            tmTestScene tm = new tmTestScene(Content, _SM);
-            _SM.AddScene(tm);
+            //tmTestScene tm = new tmTestScene(Content, _SM, _Camera);
+            //_SM.AddScene(tm);
 
-            MegaScene ms = new MegaScene(Content, _SM);
+            Scenes.Mega.MegaScene ms = new Scenes.Mega.MegaScene(Content, _SM, _Camera);
             _SM.AddScene(ms);
+
+            //ParticleTestScene pts = new ParticleTestScene(Content, _SM, _Camera);
+            //_SM.AddScene(pts);
+            ////_SM.ActivateScene("Particle Test");
+
+            Scenes.mm.mmScene mm = new Scenes.mm.mmScene(Content, _SM, _Camera);
+            _SM.AddScene(mm);
+            _SM.ActivateScene("mm");
+
+            _Camera._Position = new Vector2(GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2);
         }
 
         /// <summary>
@@ -87,7 +100,17 @@ namespace ArmadaEngine
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+            //spriteBatch.Begin(SpriteSortMode.Deferred,
+            //            BlendState.AlphaBlend,
+            //            null,
+            //            null,
+            //            null,
+            //            null,
+            //            _Camera.GetTransform());
+
             spriteBatch.Begin();
+
             // TODO: Add your drawing code here
             _SM.Draw(spriteBatch, GraphicsDevice.Viewport.Bounds);
             base.Draw(gameTime);

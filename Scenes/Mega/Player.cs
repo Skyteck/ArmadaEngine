@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using ArmadaEngine.Helpers;
 
-namespace ArmadaEngine
+namespace ArmadaEngine.Scenes.Mega
 {
     class Player : ArmadaEngine.GameObjects.Sprite
     {
