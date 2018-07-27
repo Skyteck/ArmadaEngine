@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Camera\TestCamera.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="GameObjects\Animation.cs" />
+    <Compile Include="BaseObjects\Animation.cs" />
     <Compile Include="Helpers\FPSCounter.cs" />
     <Compile Include="Helpers\HelperFunctions.cs" />
     <Compile Include="Helpers\InputHelper.cs" />
@@ -53,10 +53,55 @@
     <Compile Include="Scenes\Mega\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameObjects\Sprite.cs" />
+    <Compile Include="BaseObjects\Sprite.cs" />
     <Compile Include="Scenes\mm\mmScene.cs" />
     <Compile Include="Scenes\mm\Sprites\PuzzlePiece.cs" />
-    <Compile Include="GameObjects\AnimatedSprite.cs" />
+    <Compile Include="BaseObjects\AnimatedSprite.cs" />
+    <Compile Include="Scenes\Sagey\CollisionDetection2D.cs" />
+    <Compile Include="Scenes\Sagey\enums\Delegates.cs" />
+    <Compile Include="Scenes\Sagey\enums\enums.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Animation.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\DirtPatch.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Fire.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\EnergyPatch.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\FishingHole.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherable.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\Plant.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\Plants\Plants.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\Rock.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Gatherables\Tree.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Item.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Items\ItemBundle.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Items\Items.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\Attackable.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\Banker.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\DairyCow.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\Monsters\Projectiles\Projectile.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\Monsters\Slime.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\NPC.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\NPCs\QuestSLime.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Objective.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Objects\WorldItem.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Player.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Quest.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Recipe.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Recipes\Recipes.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\Sword.cs" />
+    <Compile Include="Scenes\Sagey\GameObjects\WorldObject.cs" />
+    <Compile Include="Scenes\Sagey\Managers\BankManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\ChemistryManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\CombatManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\DialogManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\EventManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\GatherableManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\InventoryManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\ItemManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\ItemSlot.cs" />
+    <Compile Include="Scenes\Sagey\Managers\NpcManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\PlayerManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\QuestManager.cs" />
+    <Compile Include="Scenes\Sagey\Managers\WorldObjectManager.cs" />
+    <Compile Include="Scenes\Sagey\SageyMainScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\TestScenes\ParticleTestScene.cs" />
@@ -80,6 +125,9 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="TiledSharp">
@@ -89,26 +137,101 @@
   <ItemGroup>
     <Content Include="Content\Art\BuildingRect.png" />
     <Content Include="Content\Art\edgeTex.png" />
-    <Content Include="Content\Art\Player.png" />
+    <Content Include="Content\Art\Player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Art\Tilesets\Proto.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Scenes\Sagey\Art\attackAxe.png" />
+    <Content Include="Content\Scenes\Sagey\Art\axe.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Banker.png" />
+    <Content Include="Content\Scenes\Sagey\Art\BlackTexture.png" />
+    <Content Include="Content\Scenes\Sagey\Art\BlueberryPlant.png" />
+    <Content Include="Content\Scenes\Sagey\Art\BucketItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\ClearBox.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Collision.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Corner.png" />
+    <Content Include="Content\Scenes\Sagey\Art\DairyCow.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Effect.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Fire.png" />
+    <Content Include="Content\Scenes\Sagey\Art\FishingHole.png" />
+    <Content Include="Content\Scenes\Sagey\Art\fishItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\fishSelected.png" />
+    <Content Include="Content\Scenes\Sagey\Art\FishStickItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\inventoryBG.png" />
+    <Content Include="Content\Scenes\Sagey\Art\inventoryBG2.png" />
+    <Content Include="Content\Scenes\Sagey\Art\itemSlotNormal.png" />
+    <Content Include="Content\Scenes\Sagey\Art\itemSlotSelected.png" />
+    <Content Include="Content\Scenes\Sagey\Art\LavaTile.png" />
+    <Content Include="Content\Scenes\Sagey\Art\logItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\MatchesItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\MilkItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Nulltexture.png" />
+    <Content Include="Content\Scenes\Sagey\Art\oreItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Player.png" />
+    <Content Include="Content\Scenes\Sagey\Art\QuestSlime.png" />
+    <Content Include="Content\Scenes\Sagey\Art\rock.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Slime.png" />
+    <Content Include="Content\Scenes\Sagey\Art\SlimeGooItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\SlimeShot.png" />
+    <Content Include="Content\Scenes\Sagey\Art\StrawberryItem.png" />
+    <Content Include="Content\Scenes\Sagey\Art\StrawberryPlant.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Sword.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Tiles\Collision.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Tiles\ggggg.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Tiles\ggggg2.png" />
+    <Content Include="Content\Scenes\Sagey\Art\tree.png" />
+    <Content Include="Content\Scenes\Sagey\Art\WhiteTexture.png" />
+    <Content Include="Content\Scenes\Sagey\Art\Yellowtexture.png" />
+    <Content Include="Content\Scenes\Sagey\Tilemaps\Collision.png" />
+    <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg.png" />
+    <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg2.png" />
+    <Content Include="Content\Scenes\Sagey\Tilemaps\rules.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Scenes\Sagey\Fonts\Fipps.spritefont" />
+    <None Include="Content\Scenes\Sagey\JSON\Dialog_EN_US.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\JSON\ItemList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\JSON\QuestList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\JSON\RecipeList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\Tilemaps\0-0.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\Tilemaps\0-1.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\Tilemaps\MapTwo.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\Tilemaps\testmap.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Scenes\Sagey\Tilemaps\testmap.tmx.p12280" />
     <None Include="Content\Tilemaps\MegaLevel.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Tilemaps\ProtoLevel.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Audio\" />
     <Folder Include="Content\Art\Particles\" />
     <Folder Include="Content\Fonts\" />
-    <Folder Include="Sound\" />
+    <Folder Include="Scenes\Sagey\GameObjects\UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

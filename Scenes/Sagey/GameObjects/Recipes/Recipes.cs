@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ArmadaEngine.Scenes.Sagey.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey.Recipes
+namespace ArmadaEngine.Scenes.Sagey.Recipes
 {
     class MatchesRecipe : Recipe
     {

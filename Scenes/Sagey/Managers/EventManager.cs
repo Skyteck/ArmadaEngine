@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sagey.Enums;
+using ArmadaEngine.Scenes.Sagey.Enums;
 
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {

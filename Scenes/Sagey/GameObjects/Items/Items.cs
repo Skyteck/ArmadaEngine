@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Sagey.Items
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+namespace ArmadaEngine.Scenes.Sagey.Items
 {
     class Fish : Item
     {

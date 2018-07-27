@@ -1,4 +1,4 @@
-﻿using ArmadaEngine.GameObjects;
+﻿using ArmadaEngine.BaseObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

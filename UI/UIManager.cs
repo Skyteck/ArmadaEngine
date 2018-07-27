@@ -55,6 +55,24 @@ namespace ArmadaEngine.UI
             return PanelList.Find(x => x._Name == name);
         }
 
+        public void ShowPanel(string name)
+        {
+            PanelList.Find(x => x._Name == name).ShowPanel();
+        }
+
+        public void HidePanel(string name)
+        {
+            PanelList.Find(x => x._Name == name).HidePanel();
+        }
+
+        internal void HideAll()
+        {
+            foreach(UIPanel p in PanelList)
+            {
+                p.HidePanel();
+            }
+        }
+
         public void TogglePanel(string name)
         {
             PanelList.Find(x => x._Name == name).ToggleShow();
@@ -131,5 +149,7 @@ namespace ArmadaEngine.UI
                 p.Draw(sb);
             }
         }
+
+
     }
 }

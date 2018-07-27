@@ -1,11 +1,10 @@
-﻿using Sagey.Managers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Sagey.GameObjects.NPCs
+using ArmadaEngine.Scenes.Sagey.Managers;
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.NPCs
 {
     public class DairyCow : NPC
     {

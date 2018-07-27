@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sagey.GameObjects.Objects
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     class DirtPatch : WorldObject
     {
-        public GameObjects.Gatherables.Plant MyPlant { get; set; }
+        public Gatherables.Plant MyPlant { get; set; }
 
         public DirtPatch()
         {

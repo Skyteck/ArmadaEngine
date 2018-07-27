@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledSharp;
-
+using ArmadaEngine.BaseObjects;
+using ArmadaEngine.TileMaps;
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+using ArmadaEngine.Scenes.Sagey.GameObjects.NPCs.Monsters;
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
     public class NPCManager
     {
-        public event Delegates.GameEvent NPCEvent;
+        public event ArmadaEngine.Scenes.Sagey.Delegates.GameEvent NPCEvent;
         public List<NPC> _SpriteListActive;
         public List<NPC> _SpriteListDead;
         public TilemapManager _TilemapManager;
@@ -47,7 +50,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         {
             if(thing.Type.Equals("Slime"))
             {
-                GameObjects.NPCs.Monsters.Slime newSprite = new GameObjects.NPCs.Monsters.Slime(this);
+                Slime newSprite = new GameObjects.NPCs.Monsters.Slime(this);
                 newSprite._Position = _TilemapManager.findTile(pos).tileCenter;
                 newSprite.LoadContent("Art/" + thing.Type, _Content);
                 newSprite.SetBoundaries(thing.X, thing.Width, thing.Height, thing.Y);

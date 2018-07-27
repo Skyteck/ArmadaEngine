@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     /// <summary>
     /// World Objects are things to interact with in the world. Trees, Fires, NPCs, cows?
     /// </summary>
-    public class WorldObject : AnimatedSprite
+    public class WorldObject : ArmadaEngine.BaseObjects.AnimatedSprite
     {
         private int difficulty;
         private List<WorldObject> parentList;

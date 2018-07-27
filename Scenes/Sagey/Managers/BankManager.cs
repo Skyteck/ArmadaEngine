@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ArmadaEngine.Scenes.Sagey.GameObjects;
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
     public class BankManager

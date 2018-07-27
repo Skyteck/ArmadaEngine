@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledSharp;
-using Sagey.GameObjects.Gatherables;
-using Sagey.GameObjects.Gatherables.Plants;
-
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+using ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables;
+using ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables.Plants;
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
     public class GatherableManager
@@ -21,7 +21,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         List<Gatherable> _GatherableListInActive;
         InventoryManager _InventoryManager;
         ContentManager Content;
-        TilemapManager _TilemapManager;
+        ArmadaEngine.TileMaps.TilemapManager _TilemapManager;
         List<Plant> PlantList;
         Texture2D _HpTex;
         readonly Player thePlayer;
@@ -110,8 +110,8 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             gaList.AddRange(_GatherableListInActive);
             _GatherableListActive.Clear();
             _GatherableListInActive.Clear();
-            _GatherableListActive = gaList.FindAll(x => x._CurrentState == Sprite.SpriteState.kStateActive);
-            _GatherableListInActive = gaList.FindAll(x => x._CurrentState == Sprite.SpriteState.kStateInActive);
+            _GatherableListActive = gaList.FindAll(x => x._CurrentState == BaseObjects.Sprite.SpriteState.kStateActive);
+            _GatherableListInActive = gaList.FindAll(x => x._CurrentState == BaseObjects.Sprite.SpriteState.kStateInActive);
 
             foreach(WorldObject sprite in gaList)
             {
@@ -158,19 +158,19 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             return null;
         }
 
-        public GameObjects.Items.ItemBundle GatherItem(Gatherable thing)
+        public GameObjects.ItemBundle GatherItem(Gatherable thing)
         {
             Random ran = new Random();
             thing.GetHit();
             if(thing._HP <= 0)
             {
-                GameObjects.Items.ItemBundle item = thing.GetGathered();
+                GameObjects.ItemBundle item = thing.GetGathered();
                 OnItemGathered(item.outputID.ToString());
                 return item;
             }
             else
             {
-                return new GameObjects.Items.ItemBundle();
+                return new GameObjects.ItemBundle();
             }
         }
 
@@ -197,7 +197,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
 
         public Plant GetPlant(Plant.PlantType type)
         {
-            StrawberryPlant p = (StrawberryPlant)FindPlant(Plant.PlantType.kStrawBerryType);
+           StrawberryPlant p = (StrawberryPlant)FindPlant(Plant.PlantType.kStrawBerryType);
             return p;
         }
 

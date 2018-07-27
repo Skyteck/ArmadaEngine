@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey.GameObjects.Gatherables
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables
 {
     class Tree : Gatherable
     {
@@ -42,16 +42,16 @@ namespace Sagey.GameObjects.Gatherables
             Random ran = new Random();
             ItemGiveCount = ran.Next(1, 7);
 
-            this._Tag = Sprite.SpriteType.kTreeType;
+            this._Tag = SpriteType.kTreeType;
             this.MyWorldObjectTag = WorldObjectTag.kTreeTag;
-            this._CurrentState = Sprite.SpriteState.kStateActive;
+            this._CurrentState = SpriteState.kStateActive;
 
-            Items.ItemBundle output = new Items.ItemBundle();
+            ItemBundle output = new ItemBundle();
             output.outputID = Enums.ItemID.kItemLog;
             output.amount = 1;
             output.odds = 95;
             
-            output = new Items.ItemBundle();
+            output = new ItemBundle();
             output.outputID = Enums.ItemID.kItemLog;
             output.amount = 2;
             output.odds = 1;

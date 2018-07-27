@@ -55,7 +55,7 @@ namespace ArmadaEngine.TileMaps
             Vector2 localTileMapPos = new Vector2(pos.X - (posToTileMapPos.X * mapClicked.mapWidth), pos.Y - (posToTileMapPos.Y * mapClicked.mapHeight));
             if (mapClicked != null)
             {
-                Tile clickedTile = mapClicked.findClickedTile(PosToMapPos(localTileMapPos));
+                Tile clickedTile = mapClicked.findClickedTile(PosToMapPos(localTileMapPos, mapClicked.tileWidth));
                 return clickedTile;
             }
             return null;
@@ -275,11 +275,11 @@ namespace ArmadaEngine.TileMaps
             return new Vector2(clickMapX, clickMapY);
         }
 
-        private Vector2 PosToMapPos(Vector2 pos)
+        private Vector2 PosToMapPos(Vector2 pos, int TileSize)
         {
             //need to change this to the coordinates within the tilemap itself...
-            int clickMapX = (int)pos.X / 32;
-            int clickMapY = (int)pos.Y / 32;
+            int clickMapX = (int)pos.X / TileSize;
+            int clickMapY = (int)pos.Y / TileSize;
             return new Vector2(clickMapX, clickMapY);
         }
 

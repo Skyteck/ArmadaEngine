@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace Sagey
+using ArmadaEngine.TileMaps;
+using ArmadaEngine.BaseObjects;
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     /// <summary>
     /// A NPC is any object in the game world that can move around using its own logic. FindPath is provided to get the character where it's going.
     /// For example the player's destination is set by clicking on the world. NPCs use their logic to determien their destination
     /// findPath gets things where they need to be.
     /// </summary>
-    public class NPC : AnimatedSprite
+    public class NPC : ArmadaEngine.BaseObjects.AnimatedSprite
     {
         public List<NPC> parentList;
 
@@ -29,7 +30,7 @@ namespace Sagey
         public float _StartSpeed = 5f;
         public float _Speed = 5f;
 
-        List<Tile> myPath;
+        List<TileMaps.Tile> myPath;
 
         protected List<string> myDialog;
         public bool _Interactable = false;
@@ -39,7 +40,7 @@ namespace Sagey
         public double BottomBoundary { get; private set; }
         public double TopBoundary { get; private set; }
 
-        public Tile NextTileInPath
+        public TileMaps.Tile NextTileInPath
         {
             get
             {
@@ -77,7 +78,7 @@ namespace Sagey
 
 
         bool Agressive = false;
-        List<Sprite> _TargetList;
+        List<ArmadaEngine.BaseObjects.Sprite> _TargetList;
 
 
         private Texture2D effectTex;
@@ -130,9 +131,9 @@ namespace Sagey
         public NPC(Managers.NPCManager nm)
         {
             _NPCManager = nm;
-            myPath = new List<Tile>();
-            _TargetList = new List<Sprite>();
-            Animation idle = new Animation("Idle", 64, 64, 1, 1);
+            myPath = new List<TileMaps.Tile>();
+            _TargetList = new List<ArmadaEngine.BaseObjects.Sprite>();
+           ArmadaEngine.BaseObjects.Animation idle = new ArmadaEngine.BaseObjects.Animation("Idle", 64, 64, 1, 1);
             myDialog = new List<string>();
             ItemDrops = new List<Enums.ItemID>();
             //AddAnimation(idle);

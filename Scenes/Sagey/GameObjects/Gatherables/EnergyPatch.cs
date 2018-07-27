@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey.GameObjects.Objects.Gatherables
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables
 {
     public class EnergyPatch
     {

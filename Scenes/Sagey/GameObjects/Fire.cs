@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.WorldObjects
 {
     class Fire : WorldObject
     {
 
         public Fire()
         {
-            this._Tag = Sprite.SpriteType.kFireType;
-            this._CurrentState = Sprite.SpriteState.kStateActive;
+            this._Tag = SpriteType.kFireType;
+            this._CurrentState = SpriteState.kStateActive;
             this.MyWorldObjectTag = WorldObjectTag.kFireTag;
         }
     }

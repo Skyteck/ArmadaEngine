@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Sagey.GameObjects
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
-    public class Sword : Sprite
+    public class Sword : BaseObjects.Sprite
     {
         float TTL= 0.15f;
         float currentTime = 0f;

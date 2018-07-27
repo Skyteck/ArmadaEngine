@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 
-namespace Sagey.GameObjects.NPCs.Monsters
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.NPCs.Monsters
 {
     public class Slime : NPC
     {

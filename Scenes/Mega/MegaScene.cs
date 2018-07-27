@@ -51,15 +51,15 @@ namespace ArmadaEngine.Scenes.Mega
 
         private void LoadCollision(TileMap theMap)
         {
-            TmxList<TmxObject> ObjectList = theMap.FindCollisions();
-            if (ObjectList != null)
-            {
-                foreach (TmxObject thing in ObjectList)
-                {
-                    Rectangle newR = new Rectangle((int)thing.X, (int)thing.Y, (int)thing.Width, (int)thing.Height);
-                    rectList.Add(newR);
-                }
-            }
+            //TmxList<TmxObject> ObjectList = theMap.FindCollisions();
+            //if (ObjectList != null)
+            //{
+            //    foreach (TmxObject thing in ObjectList)
+            //    {
+            //        Rectangle newR = new Rectangle((int)thing.X, (int)thing.Y, (int)thing.Width, (int)thing.Height);
+            //        rectList.Add(newR);
+            //    }
+            //}
         }
 
         public override void Update(GameTime gt)

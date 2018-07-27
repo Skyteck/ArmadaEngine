@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledSharp;
+using ArmadaEngine.BaseObjects;
 
 namespace ArmadaEngine.TileMaps
 {
@@ -34,7 +35,7 @@ namespace ArmadaEngine.TileMaps
 
         public String name;
 
-        public List<Rectangle> WallList;
+        public List<Rectangle> WallList = new List<Rectangle>();
 
         public int mapWidth;
         public int mapHeight;
@@ -43,12 +44,12 @@ namespace ArmadaEngine.TileMaps
             name = mapName;
             backgroundTiles = new List<Tile>();
             nearbyMaps = new List<string>();
-            map = new TmxMap("Content/Tilemaps/" + mapName + ".tmx");
+            map = new TmxMap("Content/Scenes/Sagey/Tilemaps/" + mapName + ".tmx");
             //nearbyMaps = mapName.Split('-').ToList();
 
             List<int> UnwalkableTileGids = FindUnwalkableTiles(map);
             string tileSetPath = map.Tilesets[0].Name.ToString();
-            tileSetPath = "Art/Tilesets/" + tileSetPath;
+            tileSetPath = "Art/Tiles/" + tileSetPath;
             tileset = content.Load<Texture2D>(tileSetPath);
 
             tileHeight = map.Tilesets[0].TileHeight;
@@ -64,6 +65,8 @@ namespace ArmadaEngine.TileMaps
             tileMapRect = new Rectangle((int)this._Postion.X, (int)this._Postion.Y, mapWidth, mapHeight);
 
             bool test = true;
+
+            LoadCollision();
 
             for (var i = 0; i < map.Layers[0].Tiles.Count; i++)
             {
@@ -148,6 +151,32 @@ namespace ArmadaEngine.TileMaps
             return null;
         }
 
+        public TmxList<TmxObject> FindFloors()
+        {
+            if (map.ObjectGroups.Count >= 1)
+            {
+                if (map.ObjectGroups.Contains("FloorLayer"))
+                {
+                    return map.ObjectGroups["FloorLayer"].Objects;
+                }
+
+            }
+            return null;
+        }
+
+        private void LoadCollision()
+        {
+            TmxList<TmxObject> ObjectList = FindFloors();
+            if (ObjectList != null)
+            {
+                foreach (TmxObject thing in ObjectList)
+                {
+                    Rectangle newR = new Rectangle((int)thing.X, (int)thing.Y, (int)thing.Width, (int)thing.Height);
+                    WallList.Add(newR);
+                }
+            }
+        }
+
         public TmxList<TmxObject> FindCollisions()
         {
             if (map.ObjectGroups.Count >= 1)
@@ -209,7 +238,7 @@ namespace ArmadaEngine.TileMaps
 
         public void ResetColors()
         {
-            foreach(Tile t in backgroundTiles)
+            foreach (Tile t in backgroundTiles)
             {
                 t.myColor = Color.White;
             }
@@ -224,7 +253,7 @@ namespace ArmadaEngine.TileMaps
                 drawTiles = backgroundTiles.FindAll(x => x.visible == true);
                 foreach (Tile tile in drawTiles)
                 {
-                    if(tile.destRect.Intersects(vp))
+                    if (tile.destRect.Intersects(vp))
                     {
                         tile.Draw(spriteBatch);
                         tilesDrawn++;

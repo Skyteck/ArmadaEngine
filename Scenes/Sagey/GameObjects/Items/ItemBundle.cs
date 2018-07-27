@@ -1,4 +1,4 @@
-﻿namespace Sagey.GameObjects.Items
+﻿namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     public class ItemBundle
     {

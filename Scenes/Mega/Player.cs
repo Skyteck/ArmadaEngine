@@ -11,7 +11,7 @@ using ArmadaEngine.Helpers;
 
 namespace ArmadaEngine.Scenes.Mega
 {
-    class Player : ArmadaEngine.GameObjects.Sprite
+    class Player : ArmadaEngine.BaseObjects.Sprite
     {
         // walk 1.5 p/f = 1.5 * 60 = 90
         // dash 3.5 p/f = 210

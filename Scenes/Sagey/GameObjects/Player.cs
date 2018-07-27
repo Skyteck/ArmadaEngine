@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
-using Sagey.GameObjects;
 using Microsoft.Xna.Framework.Graphics;
+using ArmadaEngine.BaseObjects;
 
 namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
-    public class Player : ArmadaEngine.GameObjects.AnimatedSprite
+    public class Player : ArmadaEngine.BaseObjects.AnimatedSprite
     {
         private int startHP;
 

@@ -64,7 +64,11 @@ namespace ArmadaEngine
 
             Scenes.mm.mmScene mm = new Scenes.mm.mmScene(Content, _SM, _Camera);
             _SM.AddScene(mm);
-            _SM.ActivateScene("mm");
+            //_SM.ActivateScene("mm");
+
+            Scenes.Sagey.SageyMainScene _sagey = new Scenes.Sagey.SageyMainScene(Content, _SM, _Camera);
+            _SM.AddScene(_sagey);
+            _SM.ActivateScene("Sagey");
 
             _Camera._Position = new Vector2(GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2);
         }
@@ -101,15 +105,15 @@ namespace ArmadaEngine
         {
             GraphicsDevice.Clear(Color.Black);
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred,
-            //            BlendState.AlphaBlend,
-            //            null,
-            //            null,
-            //            null,
-            //            null,
-            //            _Camera.GetTransform());
+            spriteBatch.Begin(SpriteSortMode.Deferred,
+                        BlendState.AlphaBlend,
+                        null,
+                        null,
+                        null,
+                        null,
+                        _Camera.GetTransform());
 
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
 
             // TODO: Add your drawing code here
             _SM.Draw(spriteBatch, GraphicsDevice.Viewport.Bounds);

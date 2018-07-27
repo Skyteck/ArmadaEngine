@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-
+using ArmadaEngine.Scenes.Sagey.GameObjects;
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
     public class InventoryManager
@@ -113,7 +113,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             }
         }
 
-        public void AddItem(GameObjects.Items.ItemBundle bundle)
+        public void AddItem(ItemBundle bundle)
         {
             AddItem(bundle.outputID, bundle.amount);
         }

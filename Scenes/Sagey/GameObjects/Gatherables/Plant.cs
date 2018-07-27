@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ArmadaEngine.BaseObjects;
 
-namespace Sagey.GameObjects.Gatherables
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables
 {
     public abstract class Plant : Gatherable
     {
@@ -14,7 +15,7 @@ namespace Sagey.GameObjects.Gatherables
         public double _CurrentTime;
         public int _Stage;
         public bool _Harvestable = false;
-        public Items.ItemBundle _MyDrops;
+        public ItemBundle _MyDrops;
         public enum PlantType
         {
             kStrawBerryType,

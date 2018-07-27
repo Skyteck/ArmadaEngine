@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     public class ItemSlot
     {

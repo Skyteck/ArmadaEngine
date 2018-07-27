@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using ArmadaEngine.GameObjects;
+using ArmadaEngine.BaseObjects;
 namespace ArmadaEngine.Scenes.mm
 {
     class mmScene : Scene
@@ -21,8 +21,8 @@ namespace ArmadaEngine.Scenes.mm
         public override void LoadContent()
         {
             base.LoadContent();
-            int columns = 10;
-            int rows = 10;
+            int columns = 5;
+            int rows = 5;
             mmPic = this._Content.Load<Texture2D>(@"Art/mm1");
             int pieceWidth = mmPic.Width / columns;
             int pieceHeight = mmPic.Height / rows;

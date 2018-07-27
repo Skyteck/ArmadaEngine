@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey.GameObjects.Objects
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
     class WorldItem : WorldObject
     {
         public Item MyItem;
-        public Sprite chaseTarget = null;
+        public BaseObjects.Sprite chaseTarget = null;
 
         public WorldItem(Item it, Vector2 pos)
         {
@@ -46,7 +46,7 @@ namespace Sagey.GameObjects.Objects
             base.UpdateActive(gt);
         }
 
-        public void SetTarget(Sprite target)
+        public void SetTarget(BaseObjects.Sprite target)
         {
             chaseTarget = target;
         }

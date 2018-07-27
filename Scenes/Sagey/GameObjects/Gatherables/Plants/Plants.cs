@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Sagey.GameObjects.Gatherables.Plants
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables.Plants
 {
     class StrawberryPlant : Plant
     {
@@ -13,7 +13,7 @@ namespace Sagey.GameObjects.Gatherables.Plants
             MyPlantType = PlantType.kStrawBerryType;
             _GrowTime = 10;
             this.Name = "StrawberryPlant";
-            _MyDrops = new Items.ItemBundle();
+            _MyDrops = new ItemBundle();
             _MyDrops.outputID = Enums.ItemID.kItemStrawberry;
             _MyDrops.amount = 3;
             _MyDrops.odds = 100;

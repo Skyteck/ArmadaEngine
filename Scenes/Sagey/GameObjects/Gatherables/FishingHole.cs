@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sagey.GameObjects.Gatherables
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables
 {
     class FishingHole : Gatherable
     {
@@ -39,12 +39,12 @@ namespace Sagey.GameObjects.Gatherables
             Random ran = new Random();
             fishCount = ran.Next(1, 7);
 
-            this._Tag = Sprite.SpriteType.kFishingType;
+            this._Tag = SpriteType.kFishingType;
             this.MyWorldObjectTag = WorldObjectTag.kFishingHoleTag;
-            this._CurrentState = Sprite.SpriteState.kStateActive;
+            this._CurrentState = SpriteState.kStateActive;
 
 
-            Items.ItemBundle output = new Items.ItemBundle();
+            ItemBundle output = new ItemBundle();
             output.outputID = Enums.ItemID.kItemFish;
             output.amount = 1;
             output.odds = 100;

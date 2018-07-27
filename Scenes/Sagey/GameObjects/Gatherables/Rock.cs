@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledSharp;
-using Sagey.GameObjects.Items;
+using ArmadaEngine.Scenes.Sagey.GameObjects;
 
-namespace Sagey.GameObjects.Gatherables
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables
 {
     public class Rock : Gatherable
     {
@@ -40,9 +40,9 @@ namespace Sagey.GameObjects.Gatherables
                     break;
             }
             
-            this._Tag = Sprite.SpriteType.kRockType;
+            this._Tag = SpriteType.kRockType;
             this.MyWorldObjectTag = WorldObjectTag.kRockTag;
-            this._CurrentState = Sprite.SpriteState.kStateActive;
+            this._CurrentState = SpriteState.kStateActive;
 
             _TrueStartHP = 8;
 

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sagey.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace Sagey
+using ArmadaEngine.BaseObjects;
+namespace ArmadaEngine.Scenes.Sagey.GameObjects
 {
-    public class Projectile : Sprite
+    public class Projectile : ArmadaEngine.BaseObjects.Sprite
     {
         public Vector2 _Heading;
         public double _Speed;
@@ -59,7 +58,7 @@ namespace Sagey
 
         protected override void UpdateActive(GameTime gameTime)
         {
-            collisionBox._Position = HelperFunctions.PointToVector(this._ProjectileTip.Location);
+            collisionBox._Position = ArmadaEngine.Helpers.HelperFunctions.PointToVector(this._ProjectileTip.Location);
             if (this._CurrentState != SpriteState.kStateActive) return;
             this._Position.X += (float)(_Heading.X * (_Speed * gameTime.ElapsedGameTime.TotalSeconds));
             this._Position.Y += (float)(_Heading.Y * (_Speed * gameTime.ElapsedGameTime.TotalSeconds));

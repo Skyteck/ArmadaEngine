@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ArmadaEngine.GameObjects;
+using ArmadaEngine.BaseObjects;
 using Microsoft.Xna.Framework.Graphics;
 using ArmadaEngine.Helpers;
 
@@ -12,7 +12,7 @@ namespace ArmadaEngine.Scenes.mm.Sprites
 {
     class PuzzlePiece : Sprite
     {
-        Rectangle myRect;
+        public Rectangle myRect;
         public bool Clicked = false;
         public Vector2 ClickOffset = Vector2.Zero;
         public bool HasGravity = false;
@@ -20,6 +20,9 @@ namespace ArmadaEngine.Scenes.mm.Sprites
         public int Row;
         public int Col;
         public float origZ;
+        public List<PuzzlePiece> linkedPieces = new List<PuzzlePiece>();
+        public List<Rectangle> RectsToDraw = new List<Rectangle>();
+        public bool delete = false;
         public Rectangle topRect
         {
             get
@@ -60,6 +63,7 @@ namespace ArmadaEngine.Scenes.mm.Sprites
             Row = row;
             Col = col;
             origZ = _ZOrder;
+            RectsToDraw.Add(myRect);
         }
 
         public void Update(GameTime gt, List<PuzzlePiece> pList)
@@ -75,6 +79,7 @@ namespace ArmadaEngine.Scenes.mm.Sprites
                     Clicked = false;
                     CheckNeighbors(pList);
                     _ZOrder = origZ;
+
                 }
                 else
                 {
@@ -107,12 +112,14 @@ namespace ArmadaEngine.Scenes.mm.Sprites
             {
                 //check for piece to right
                 if (p == this) continue;
+                bool linkFound = false;
                 if (p.Col == (this.Col + 1) && p.Row == this.Row)
                 {
                     if (this.rightRect.Intersects(p.leftRect))
                     {
                         this._Position.Y = p._Position.Y;
                         this._Position.X = p._Position.X - this.frameWidth;
+                        linkFound = true;
                     }
 
                 }
@@ -123,6 +130,7 @@ namespace ArmadaEngine.Scenes.mm.Sprites
                     {
                         this._Position.Y = p._Position.Y;
                         this._Position.X = p._Position.X + this.frameWidth;
+                        linkFound = true;
                     }
 
                 }
@@ -134,6 +142,7 @@ namespace ArmadaEngine.Scenes.mm.Sprites
                     {
                         this._Position.Y = p._Position.Y - frameHeight;
                         this._Position.X = p._Position.X;
+                        linkFound = true;
                     }
 
                 }
@@ -145,18 +154,26 @@ namespace ArmadaEngine.Scenes.mm.Sprites
                     {
                         this._Position.Y = p._Position.Y + frameHeight;
                         this._Position.X = p._Position.X;
+                        linkFound = true;
                     }
 
 
                 }
-
+                //if(linkFound)
+                //{
+                //    RectsToDraw.Add(p.myRect);
+                //}
 
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch, myRect);
+            foreach(Rectangle r in RectsToDraw)
+            {
+                base.Draw(spriteBatch, r);
+
+            }
         }
     }
 }

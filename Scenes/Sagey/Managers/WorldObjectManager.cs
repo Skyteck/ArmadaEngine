@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledSharp;
-using Sagey.GameObjects.Gatherables;
-using Sagey.Enums;
-using Sagey.GameObjects.Objects;
-using ArmadaEngine.UI;
+using ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables;
+using ArmadaEngine.Scenes.Sagey.Enums;
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+using ArmadaEngine.Scenes.Sagey.GameObjects.WorldObjects;
+using ArmadaEngine.TileMaps;
+
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
     public class WorldObjectManager
@@ -59,7 +61,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         {
             if (thing.Type.Equals("Dirt"))
             {
-                GameObjects.Objects.DirtPatch anotherFish = new GameObjects.Objects.DirtPatch();
+                DirtPatch anotherFish = new DirtPatch();
                 anotherFish.LoadContent("Art/ClearBox", Content);
                 anotherFish._Position = _TilemapManager.findTile(pos).tileCenter;
                 anotherFish.ParentList = ObjectList;
@@ -68,9 +70,9 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             }
         }
 
-        public void CreateObject(Sprite.SpriteType objectType, Vector2 position)
+        public void CreateObject(ArmadaEngine.BaseObjects.Sprite.SpriteType objectType, Vector2 position)
         {
-            if (objectType == Sprite.SpriteType.kFireType)
+            if (objectType == ArmadaEngine.BaseObjects.Sprite.SpriteType.kFireType)
             {
                 Fire fire = new Fire();
                 fire.LoadContent("Art/Fire", Content);
@@ -90,8 +92,8 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             objectList.Clear();
             objectListInactive.Clear();
             detectorList.Clear();
-            objectList = combinedList.FindAll(x => x._CurrentState == Sprite.SpriteState.kStateActive);
-            objectListInactive = combinedList.FindAll(x => x._CurrentState == Sprite.SpriteState.kStateInActive);
+            objectList = combinedList.FindAll(x => x._CurrentState == BaseObjects.Sprite.SpriteState.kStateActive);
+            objectListInactive = combinedList.FindAll(x => x._CurrentState == BaseObjects.Sprite.SpriteState.kStateInActive);
 
             detectorList = objectList.FindAll(x => x._Detector == true);
 
@@ -101,7 +103,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
                 sprite.Update(gameTime);
             }
 
-            foreach (WorldItem item in WorldItems.FindAll(x=>x._CurrentState == Sprite.SpriteState.kStateActive))
+            foreach (WorldItem item in WorldItems.FindAll(x=>x._CurrentState == BaseObjects.Sprite.SpriteState.kStateActive))
             {
                 item.Update(gameTime);
 
@@ -173,12 +175,12 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         public void Draw(SpriteBatch spriteBatch)
         {
 
-            foreach(Sprite sprite in ObjectList)
+            foreach(BaseObjects.Sprite sprite in ObjectList)
             {
                 sprite.Draw(spriteBatch);
             }
 
-            foreach(Sprite item in WorldItems.FindAll(x=>x._CurrentState == Sprite.SpriteState.kStateActive))
+            foreach(BaseObjects.Sprite item in WorldItems.FindAll(x=>x._CurrentState == BaseObjects.Sprite.SpriteState.kStateActive))
             {
                 item.Draw(spriteBatch);
             }

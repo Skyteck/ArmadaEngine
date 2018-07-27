@@ -1,9 +1,8 @@
-﻿using Sagey.Managers;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
+using ArmadaEngine.Scenes.Sagey.Managers;
 
 
-
-namespace Sagey.GameObjects.NPCs
+namespace ArmadaEngine.Scenes.Sagey.GameObjects.NPCs
 {
     public class QuestSlime : NPC
     {

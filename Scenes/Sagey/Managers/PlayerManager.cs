@@ -1,4 +1,4 @@
-﻿using Sagey.GameObjects.Gatherables;
+﻿using ArmadaEngine.Scenes.Sagey.GameObjects.Gatherables;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ArmadaEngine.Scenes.Sagey.GameObjects;
+using ArmadaEngine.BaseObjects;
+using ArmadaEngine.Helpers;
+using ArmadaEngine.TileMaps;
 
 namespace ArmadaEngine.Scenes.Sagey.Managers
 {
@@ -21,7 +25,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         WorldObjectManager _WorldObjectManager;
         GatherableManager _GatherManager;
         NPCManager _NPCManager;
-        TilemapManager _MapManager;
+        TileMaps.TilemapManager _MapManager;
         public Vector2 _PlayerPos;
 
 
@@ -344,7 +348,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
 
         private void Gather(Gatherable gatherable)
         {
-            GameObjects.Items.ItemBundle itemGet = _GatherManager.GatherItem(gatherable);
+            GameObjects.ItemBundle itemGet = _GatherManager.GatherItem(gatherable);
             if(itemGet.outputID != Enums.ItemID.kItemNone)
             {
                 _InventoryManager.AddItem(itemGet);
