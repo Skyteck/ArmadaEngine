@@ -22,7 +22,7 @@ namespace ArmadaEngine.Scenes.TestScenes
         Rectangle tileRect;
         bool diagonalPaths = false;
 
-        public tmTestScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
+        public tmTestScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.ArmadaCamera ca) : base(c, sm, ca)
         {
             _Name = "TmTest";
         }

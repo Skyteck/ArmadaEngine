@@ -13,7 +13,7 @@ namespace ArmadaEngine.Scenes.mm
     {
         Texture2D mmPic;
         List<Sprites.PuzzlePiece> splitPics = new List<Sprites.PuzzlePiece>();
-        public mmScene(ContentManager c, SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
+        public mmScene(ContentManager c, SceneManager sm, Camera.ArmadaCamera ca) : base(c, sm, ca)
         {
             this._Name = "mm";
         }
@@ -72,7 +72,7 @@ namespace ArmadaEngine.Scenes.mm
         {
             base.Update(gt);
 
-            _Camera.Update();
+            //_Camera.Update();
 
             //splitPics = splitPics.OrderBy(x => x._ZOrder).ToList();
             if (splitPics.Count(x=>x.Clicked) >= 1)

@@ -16,8 +16,8 @@ namespace ArmadaEngine.Scenes
         public string _Name = "Untitled";
         public bool _Active = false;
         protected SceneManager _SM;
-        protected TestCamera _Camera;
-        public Scene(ContentManager c, SceneManager sm, TestCamera ca)
+        protected ArmadaCamera _Camera;
+        public Scene(ContentManager c, SceneManager sm, ArmadaCamera ca = null)
         {
             _Content = c;
             _SM = sm;
@@ -42,6 +42,10 @@ namespace ArmadaEngine.Scenes
         public virtual void Update(GameTime gt)
         {
             Helpers.InputHelper.Update();
+            if(_Camera != null)
+            {
+                //_Camera.Update();
+            }
         }
 
         public virtual void Draw(SpriteBatch sb, Rectangle b)

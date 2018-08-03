@@ -18,17 +18,18 @@ namespace ArmadaEngine.UI
         Rectangle mmSlideInRect;
         Rectangle mmSlideOutRect;
 
-        public UIManager()
+        public UIManager(ContentManager c)
         {
             PanelList = new List<UIPanel>();
             mmSlideInRect = new Rectangle(0, 140, 60, 220);
             mmSlideOutRect = new Rectangle(0, 120, 100, 260);
+            _ContentManager = c;
         }
 
-        public void LoadContent(ContentManager content)
-        {
-            _ContentManager = content;
-        }
+        //public void LoadContent(ContentManager content)
+        //{
+        //    _ContentManager = content;
+        //}
 
         public void CreatePanel(String name, Vector2 pos, Vector2 size, string texName)
         {
@@ -106,34 +107,7 @@ namespace ArmadaEngine.UI
                 }
             }
 
-            if(mmSlideOutRect.Contains(Helpers.InputHelper.MouseScreenPos))
-            {
-                if(mmSlideInRect.Contains(Helpers.InputHelper.MouseScreenPos))
-                {
-                    UIPanel mm = this.GetUIPanel("MainMenu");
-                    Vector2 prevPos = mm._Position;
-                    mm.SetPosition(new Vector2(mm._Position.X + 3, mm._Position.Y));
-                    if(mm._Position.X >= mm._Size.X)
-                    {
-                        mm.SetPosition(prevPos);
-                    }
-                }
-            }
-            else
-            {
-                UIPanel mm = this.GetUIPanel("MainMenu");
-                mm.SetPosition(new Vector2(mm._Position.X - 1, mm._Position.Y));
-                if (mm._Position.X <= -45)
-                {
-                    mm.SetPosition(new Vector2(-45, 150));
-                }
 
-            }
-
-            if(Helpers.InputHelper.IsKeyPressed(Keys.D1))
-            {
-                TogglePanel("Store");
-            }
 
         }
 

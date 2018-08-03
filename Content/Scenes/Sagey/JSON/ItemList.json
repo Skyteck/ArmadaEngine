@@ -85,7 +85,7 @@
     "_Weight": 0.0,
     "_SaleValue": 1,
     "itemtexture": null,
-    "_Stackable": false,
+    "_Stackable": true,
     "_Uses": 1,
     "_ID": 15
   },

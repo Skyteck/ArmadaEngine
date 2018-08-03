@@ -22,7 +22,7 @@ namespace ArmadaEngine.Scenes.Mega
 
         FPSCounter fps = new FPSCounter();
         
-        public MegaScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
+        public MegaScene(Microsoft.Xna.Framework.Content.ContentManager c, Scenes.SceneManager sm, Camera.ArmadaCamera ca) : base(c, sm, ca)
         {
             _Name = "Mega";
         }

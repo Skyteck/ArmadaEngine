@@ -10,7 +10,7 @@ namespace ArmadaEngine.UI
 {
     public class UILabel : UIElement
     {
-        public string _Label;
+        public string _Label = "";
         private SpriteFont font;
 
         public UILabel(Vector2 pos, UIManager uim) : base(uim)
@@ -31,10 +31,15 @@ namespace ArmadaEngine.UI
 
             if(_Label != null)
             {
-                _Size = font.MeasureString(_Label);
+                _Size = GetSize();
                 OffsetPos.X -= (int)(_Size.X / 2);
                 OffsetPos.Y -= (int)(_Size.Y / 2);
             }
+        }
+
+        public Vector2 GetSize()
+        {
+            return font.MeasureString(_Label);
         }
 
         public override void Draw(SpriteBatch sb)

@@ -11,7 +11,7 @@ namespace ArmadaEngine.Scenes.TestScenes
 {
     class ParticleTestScene : Scene
     {
-        public ParticleTestScene(ContentManager c, SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
+        public ParticleTestScene(ContentManager c, SceneManager sm, Camera.ArmadaCamera ca) : base(c, sm, ca)
         { 
             _Name = "Particle Test";
         }

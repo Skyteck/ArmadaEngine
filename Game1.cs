@@ -14,7 +14,7 @@ namespace ArmadaEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Scenes.SceneManager _SM = new Scenes.SceneManager();
-        TestCamera _Camera;
+        ArmadaCamera _Camera;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -44,7 +44,7 @@ namespace ArmadaEngine
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _Camera = new TestCamera(GraphicsDevice);
+            _Camera = new ArmadaCamera(GraphicsDevice);
             // TODO: use this.Content to load your game content here
             //TestScene ts = new TestScene(Content, _SM, _Camera);
             //_SM.AddScene(ts);
@@ -105,20 +105,18 @@ namespace ArmadaEngine
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred,
-                        BlendState.AlphaBlend,
-                        null,
-                        null,
-                        null,
-                        null,
-                        _Camera.GetTransform());
+            //spriteBatch.Begin(SpriteSortMode.Deferred,
+            //            BlendState.AlphaBlend,
+            //            null,
+            //            null,
+            //            null,
+            //            null,
+            //            _Camera.GetTransform());
 
             //spriteBatch.Begin();
 
             // TODO: Add your drawing code here
             _SM.Draw(spriteBatch, GraphicsDevice.Viewport.Bounds);
-            base.Draw(gameTime);
-            spriteBatch.End();
         }
     }
 }

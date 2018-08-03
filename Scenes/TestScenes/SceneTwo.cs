@@ -13,7 +13,7 @@ namespace ArmadaEngine.Scenes.TestScenes
     class SceneTwo : Scenes.Scene
     {
         Sprite tester;
-        public SceneTwo(ContentManager c, Scenes.SceneManager sm, Camera.TestCamera ca) : base(c, sm, ca)
+        public SceneTwo(ContentManager c, Scenes.SceneManager sm, Camera.ArmadaCamera ca) : base(c, sm, ca)
         {
             this._Name = "Scene Two";
 

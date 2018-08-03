@@ -155,9 +155,9 @@ namespace ArmadaEngine.TileMaps
         {
             if (map.ObjectGroups.Count >= 1)
             {
-                if (map.ObjectGroups.Contains("FloorLayer"))
+                if (map.ObjectGroups.Contains("Collision"))
                 {
-                    return map.ObjectGroups["FloorLayer"].Objects;
+                    return map.ObjectGroups["Collision"].Objects;
                 }
 
             }
@@ -248,7 +248,7 @@ namespace ArmadaEngine.TileMaps
         {
             if (active)
             {
-                int tilesDrawn = 0;
+                //int tilesDrawn = 0;
                 List<Tile> drawTiles = new List<Tile>();
                 drawTiles = backgroundTiles.FindAll(x => x.visible == true);
                 foreach (Tile tile in drawTiles)
@@ -256,7 +256,7 @@ namespace ArmadaEngine.TileMaps
                     if (tile.destRect.Intersects(vp))
                     {
                         tile.Draw(spriteBatch);
-                        tilesDrawn++;
+                        //tilesDrawn++;
                     }
 
                 }

@@ -8,15 +8,22 @@ using System.Threading.Tasks;
 
 namespace ArmadaEngine.Camera
 {
-    public class TestCamera 
+    public class ArmadaCamera
     {
         protected float Zoom;
         public Matrix _Transform;
         public Vector2 _Position;
-        Vector2 vpSize;
         protected float Rotation;
 
         private GraphicsDevice _GraphicsDevice;
+
+        public Rectangle _Viewport
+        {
+            get
+            {
+                return new Rectangle((int)(this._Position.X - (_GraphicsDevice.Viewport.Width*0.5)), (int)(this._Position.Y - (_GraphicsDevice.Viewport.Height * 0.5f)), _GraphicsDevice.Viewport.Width, _GraphicsDevice.Viewport.Height);
+            }
+        }
 
         public float _Zoom
         {
@@ -43,7 +50,7 @@ namespace ArmadaEngine.Camera
             }
         }
 
-        public TestCamera(GraphicsDevice gD)
+        public ArmadaCamera(GraphicsDevice gD)
         {
             Zoom = 1.0f;
             Rotation = 0f;
@@ -56,18 +63,13 @@ namespace ArmadaEngine.Camera
             _Position += amt;
         }
 
-        public void Update()
-        {
-            vpSize = new Vector2(_GraphicsDevice.Viewport.Width * 0.5f, _GraphicsDevice.Viewport.Height * 0.5f);
-        }
-
         public Matrix GetTransform()
         {
             Vector3 v = new Vector3(-_Position.X, -_Position.Y, 0);
             _Transform = Matrix.CreateTranslation(v) *
                                          Matrix.CreateRotationZ(Rotation) *
                                          Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
-                                         Matrix.CreateTranslation(new Vector3(vpSize.X, vpSize.Y, 0));
+                                         Matrix.CreateTranslation(new Vector3(_GraphicsDevice.Viewport.Width * 0.5f, _GraphicsDevice.Viewport.Height * 0.5f, 0));
             return _Transform;
         }
 

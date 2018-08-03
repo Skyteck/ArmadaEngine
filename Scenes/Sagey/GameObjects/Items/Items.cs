@@ -11,7 +11,7 @@ namespace ArmadaEngine.Scenes.Sagey.Items
         public Fish()
         {
             this._ID = Enums.ItemID.kItemFish;
-            this._Weight = 1;
+            this._Weight = 0;
             this._SaleValue = 1;
             this._Name = "Fish";
             this._Stackable = true;
@@ -79,9 +79,21 @@ namespace ArmadaEngine.Scenes.Sagey.Items
         public Strawberry()
         {
             this._ID = Enums.ItemID.kItemStrawberry;
-            this._Weight = 2;
+            this._Weight = 0;
             this._SaleValue = 1;
             this._Name = "Strawberry";
+            this._Stackable = true;
+        }
+    }
+
+    class SlimeGoo : Item
+    {
+        public SlimeGoo()
+        {
+            this._ID = Enums.ItemID.kItemSlimeGoo;
+            this._Weight = 0;
+            this._SaleValue = 1;
+            this._Name = "Slime Goo";
             this._Stackable = true;
         }
     }

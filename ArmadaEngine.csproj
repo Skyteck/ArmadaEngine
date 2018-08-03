@@ -41,7 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Camera\TestCamera.cs" />
+    <Compile Include="Camera\ArmadaCamera.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="BaseObjects\Animation.cs" />
     <Compile Include="Helpers\FPSCounter.cs" />
@@ -102,6 +102,12 @@
     <Compile Include="Scenes\Sagey\Managers\QuestManager.cs" />
     <Compile Include="Scenes\Sagey\Managers\WorldObjectManager.cs" />
     <Compile Include="Scenes\Sagey\SageyMainScene.cs" />
+    <Compile Include="Scenes\Sagey\UI\Bank\BankItemsContainer.cs" />
+    <Compile Include="Scenes\Sagey\UI\Bank\BankListItem.cs" />
+    <Compile Include="Scenes\Sagey\UI\Bank\BankPanel.cs" />
+    <Compile Include="Scenes\Sagey\UI\Inventory\InventoryItemsContainer.cs" />
+    <Compile Include="Scenes\Sagey\UI\Inventory\InventoryListItem.cs" />
+    <Compile Include="Scenes\Sagey\UI\Inventory\InventoryPanel.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\TestScenes\ParticleTestScene.cs" />
@@ -153,6 +159,7 @@
     <Content Include="Content\Scenes\Sagey\Art\Collision.png" />
     <Content Include="Content\Scenes\Sagey\Art\Corner.png" />
     <Content Include="Content\Scenes\Sagey\Art\DairyCow.png" />
+    <Content Include="Content\Scenes\Sagey\Art\edgeTex.png" />
     <Content Include="Content\Scenes\Sagey\Art\Effect.png" />
     <Content Include="Content\Scenes\Sagey\Art\Fire.png" />
     <Content Include="Content\Scenes\Sagey\Art\FishingHole.png" />

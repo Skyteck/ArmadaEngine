@@ -270,8 +270,8 @@ namespace ArmadaEngine.TileMaps
         public Vector2 PosToWorldTilePos(Vector2 pos)
         {
 
-            int clickMapX = (int)pos.X / 1600;
-            int clickMapY = (int)pos.Y / 1600;
+            int clickMapX = (int)pos.X / 2048;
+            int clickMapY = (int)pos.Y / 2048;
             return new Vector2(clickMapX, clickMapY);
         }
 

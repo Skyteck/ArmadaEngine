@@ -12,7 +12,13 @@ namespace ArmadaEngine.UI
     {
         public List<UIElement> itemsList;
 
-        public int buffer = 37;
+        public int bufferX = 37;
+        public int bufferY = 37;
+
+        /// <summary>
+        /// Container for multiple Ui Elements. keeps them organized into rows and columns
+        /// </summary>
+        /// <param name="uim"></param>
         public UIListContainer(UIManager uim): base(uim)
         {
             itemsList = new List<UIElement>();
@@ -27,8 +33,8 @@ namespace ArmadaEngine.UI
              * */
             base.Draw(spriteBatch);
 
-            int columns = (int)(_Size.X / buffer);
-            int rows = (int)(_Size.Y / buffer);
+            int columns = (int)(_Size.X / bufferX);
+            int rows = (int)(_Size.Y / bufferY);
             int toDraw = columns * rows;
             int itemsDrawn = 0;
             int currentRow = 0;
@@ -76,7 +82,7 @@ namespace ArmadaEngine.UI
             while (itemsDrawn < itemsList.Count)
             {
                 //where to draw?
-                Vector2 pos = new Vector2(StartPos.X + (currentColumn * buffer), StartPos.Y + (currentRow * buffer));
+                Vector2 pos = new Vector2(StartPos.X + (currentColumn * bufferX), StartPos.Y + (currentRow * bufferY));
                 itemsList[itemsDrawn].SetPosition(pos);
                 itemsList[itemsDrawn].Draw(spriteBatch);
 

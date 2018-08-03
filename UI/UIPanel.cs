@@ -87,6 +87,10 @@ namespace ArmadaEngine.UI
             }
         }
 
+        /// <summary>
+        /// A Background that can contain many UI elements.
+        /// </summary>
+        /// <param name="uim"></param>
         public UIPanel(UIManager uim) : base(uim)
         {
             ButtonList = new List<UIButton>();

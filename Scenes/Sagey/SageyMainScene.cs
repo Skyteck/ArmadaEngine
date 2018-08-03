@@ -30,7 +30,7 @@ namespace ArmadaEngine.Scenes.Sagey
         TileMaps.TilemapManager _MapManager;
         public NPCManager _NPCManager;
         WorldObjectManager _WorldObjectManager;
-        UI.UIManager _UIManager;
+        ArmadaEngine.UI.UIManager _UIManager;
         ChemistryManager _ChemistryManager;
         ItemManager _ItemManager;
         PlayerManager _PlayerManager;
@@ -53,12 +53,12 @@ namespace ArmadaEngine.Scenes.Sagey
         Matrix Scale;
 
 
-        public SageyMainScene(ContentManager c, SceneManager sm, TestCamera ca) : base(c, sm, ca)
+        public SageyMainScene(ContentManager c, SceneManager sm, ArmadaCamera ca) : base(c, sm, ca)
         {
             this._Name = "Sagey";
             _Content.RootDirectory = "Content/Scenes/Sagey";
             player = new GameObjects.Player();
-            _UIManager = new UI.UIManager();
+            _UIManager = new ArmadaEngine.UI.UIManager(_Content);
             _QuestManager = new QuestManager();
             _MapManager = new  TileMaps.TilemapManager();
             _DialogManager = new Managers.DialogManager(_QuestManager);
@@ -96,10 +96,7 @@ namespace ArmadaEngine.Scenes.Sagey
         public override void LoadContent()
         {
             base.LoadContent();
-
-            _Content.RootDirectory = "Content/Scenes/Sagey";
             player.LoadContent("Art/Player", _Content);
-            //LoadGUI();
             _MapManager.LoadMap("0-0", _Content);
 
             LoadMapNPCs(_MapManager.findMapByName("0-0"));
@@ -114,6 +111,12 @@ namespace ArmadaEngine.Scenes.Sagey
             _GatherableManager.LoadContent(_Content);
 
             _SelectTex = _Content.Load<Texture2D>("Art/WhiteTexture");
+            _InvenManager.AddItem(Enums.ItemID.kItemFish, 1500);
+            _InvenManager.AddItem(Enums.ItemID.kItemStrawberry, 1000000);
+            _InvenManager.AddItem(Enums.ItemID.kItemSlimeGoo, 999999999);
+            _InvenManager.AddItem(Enums.ItemID.kItemBucket, 3);
+            _BankManager.AddItem(Enums.ItemID.kItemOre, 5);
+            LoadGUI();
             //check if save exists
 
             ////else start a new save
@@ -245,7 +248,21 @@ namespace ArmadaEngine.Scenes.Sagey
 
         private void LoadGUI()
         {
-            throw new NotImplementedException();
+            UI.InventoryPanel inv = new UI.InventoryPanel(_UIManager, _InvenManager);
+            inv.LoadContent("Panel");
+            inv.SetSize(new Vector2(300, 300));
+            inv.Setup();
+            inv.HidePanel();
+            inv.SetPosition(new Vector2(400, 100));
+            _UIManager.AddPanel(inv);
+
+            UI.BankPanel bnkp = new UI.BankPanel(_UIManager, _BankManager);
+            bnkp.LoadContent("Panel");
+            bnkp.SetSize(new Vector2(300, 300));
+            bnkp.Setup();
+            bnkp.ShowPanel();
+            bnkp.SetPosition(new Vector2(0, 0));
+            _UIManager.AddPanel(bnkp);
         }
 
         public void LoadMapNPCs(TileMap testMap)
@@ -291,7 +308,7 @@ namespace ArmadaEngine.Scenes.Sagey
             _EventManager.ProcessEvents();
 
             //ProcessMouse(gt);
-            //ProcessKeyboard(gt);
+            ProcessKeyboard(gt);
 
 
             if (InputHelper.IsKeyPressed(Keys.J))
@@ -318,8 +335,9 @@ namespace ArmadaEngine.Scenes.Sagey
 
 
             //ProcessCamera(gameTime);
+            //_Camera.SetPosition(player._Position);
             _Camera._Position = player._Position;
-            //_UIManager.Update(gt);
+            _UIManager.Update(gt);
             
 
 
@@ -334,7 +352,7 @@ namespace ArmadaEngine.Scenes.Sagey
         {
             if (InputHelper.IsKeyPressed(Keys.E))
             {
-                _UIManager.TogglePanel("Crafting");
+                _UIManager.TogglePanel("Bank");
             }
             if (InputHelper.IsKeyPressed(Keys.I))
             {
@@ -344,10 +362,10 @@ namespace ArmadaEngine.Scenes.Sagey
             {
                 _UIManager.HideAll();
             }
-            if (InputHelper.IsKeyPressed(Keys.P))
-            {
-                //SaveGame();
-            }
+            //if (InputHelper.IsKeyPressed(Keys.P))
+            //{
+            //    //SaveGame();
+            //}
         }
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle b)
@@ -355,15 +373,15 @@ namespace ArmadaEngine.Scenes.Sagey
             base.Draw(spriteBatch, b);
 
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred,
-            //            BlendState.AlphaBlend,
-            //            null,
-            //            null,
-            //            null,
-            //            null,
-            //            _Camera.GetTransform());
+            spriteBatch.Begin(SpriteSortMode.Deferred,
+                        BlendState.AlphaBlend,
+                        null,
+                        null,
+                        null,
+                        null,
+                        _Camera.GetTransform());
 
-            _MapManager.Draw(spriteBatch, b);
+            _MapManager.Draw(spriteBatch, _Camera._Viewport);
 
             _PlayerManager.Draw(spriteBatch);
 
@@ -383,8 +401,9 @@ namespace ArmadaEngine.Scenes.Sagey
             //base.Draw(gt);
             spriteBatch.End();
             spriteBatch.Begin();
-            //_UIManager.Draw(spriteBatch);
+            _UIManager.Draw(spriteBatch);
             spriteBatch.DrawString(font, _PlayerManager.currentInteracttext, new Vector2(100, 100), Color.White);
+            spriteBatch.End();
         }
 
         private void DrawSelectRect(SpriteBatch sb)

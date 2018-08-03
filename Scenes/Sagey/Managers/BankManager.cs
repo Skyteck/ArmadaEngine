@@ -13,6 +13,7 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
     {
         public event Delegates.GameEvent ItemBankedEvent;
         public event Delegates.GameEvent ItemRemovedEvent;
+        public event EventHandler BankChangedEvent;
 
         public ItemManager _ItemManager;
         public List<ItemSlot> itemSlots;
@@ -171,6 +172,11 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         private void OnItemRemoved(string itemName)
         {
             ItemRemovedEvent?.Invoke(Enums.EventTypes.kEventItemRemoved, itemName);
+        }
+
+        private void OnBankChanged()
+        {
+            BankChangedEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }
