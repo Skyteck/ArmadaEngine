@@ -195,6 +195,7 @@
     <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg.png" />
     <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg2.png" />
     <Content Include="Content\Scenes\Sagey\Tilemaps\rules.txt" />
+    <Content Include="Content\Scenes\Stest\Inverse.fx" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

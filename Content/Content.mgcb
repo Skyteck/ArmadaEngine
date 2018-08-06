@@ -560,3 +560,9 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/Sagey/Art/Inventory3BG.png
 
+#begin Scenes/Stest/Inverse.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Scenes/Stest/Inverse.fx
+
