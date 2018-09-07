@@ -43,7 +43,8 @@ namespace ArmadaEngine.Scenes.Sagey.UI
 
             for (int i = 0; i < 28; i++)
             {
-                BankListItem ili = new BankListItem(_UIManager);
+                Inventory.ItemListItem ili = new Inventory.ItemListItem(_UIManager);
+                ili.debugMode = true;
                 ili._Size = new Vector2(60, 45);
                 ili.LoadContent("Inventory3BG");
                 ili.Setup();
@@ -51,7 +52,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI
                 ItemsContainer.InvenItems.Add(ili);
             }
 
-            foreach(BankListItem ili in ItemsContainer.InvenItems)
+            foreach(Inventory.ItemListItem ili in ItemsContainer.InvenItems)
             {
                 ili.Reset();
             }
@@ -64,10 +65,25 @@ namespace ArmadaEngine.Scenes.Sagey.UI
             }
         }
 
+        public override void ProcessClick(Vector2 pos)
+        {
+            base.ProcessClick(pos);
+
+            foreach(Inventory.ItemListItem bli in ItemsContainer.InvenItems)
+            {
+                if(bli._Show && bli.ListRect.Contains(Helpers.InputHelper.MouseScreenPos))
+                {
+                    bli._Selected = true;
+                    _BankManager.ToInventory(bli._ItemID, 1);
+                }
+                
+            }
+        }
+
         public void HandleBankChanged(object sender, EventArgs args)
         {
             if (!this._Show) return;
-            foreach (BankListItem ili in ItemsContainer.InvenItems)
+            foreach (Inventory.ItemListItem ili in ItemsContainer.InvenItems)
             {
                 ili.Reset();
             }

@@ -43,7 +43,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI
 
             for (int i = 0; i < 28; i++)
             {
-                InventoryListItem ili = new InventoryListItem(_UIManager);
+                ItemListItem ili = new ItemListItem(_UIManager);
                 ili._Size = new Vector2(60, 45);
                 ili.LoadContent("Inventory3BG");
                 ili.Setup();
@@ -51,7 +51,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI
                 ItemsContainer.InvenItems.Add(ili);
             }
 
-            foreach(InventoryListItem ili in ItemsContainer.InvenItems)
+            foreach(ItemListItem ili in ItemsContainer.InvenItems)
             {
                 ili.Reset();
             }
@@ -67,7 +67,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI
         public void HandleInventoryChanged(object sender, EventArgs args)
         {
             if (!this._Show) return;
-            foreach (InventoryListItem ili in ItemsContainer.InvenItems)
+            foreach (ItemListItem ili in ItemsContainer.InvenItems)
             {
                 ili.Reset();
             }

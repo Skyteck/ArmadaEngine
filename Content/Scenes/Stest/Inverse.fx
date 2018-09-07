@@ -1,46 +1,26 @@
-﻿#if OPENGL
-	#define SV_POSITION POSITION
-	#define VS_SHADERMODEL vs_3_0
-	#define PS_SHADERMODEL ps_3_0
-#else
-	#define VS_SHADERMODEL vs_4_0_level_9_1
-	#define PS_SHADERMODEL ps_4_0_level_9_1
-#endif
-
-matrix WorldViewProjection;
-
-struct VertexShaderInput
+﻿sampler TextureSampler : register(s0);
+ 
+float4 Inverse(float4 pos : SV_POSITION, float4 color1 : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
 {
-	float4 Position : POSITION0;
-	float4 Color : COLOR0;
-};
-
-struct VertexShaderOutput
-{
-	float4 Position : SV_POSITION;
-	float4 Color : COLOR0;
-};
-
-VertexShaderOutput MainVS(in VertexShaderInput input)
-{
-	VertexShaderOutput output = (VertexShaderOutput)0;
-
-	output.Position = mul(input.Position, WorldViewProjection);
-	output.Color = input.Color;
-
-	return output;
+    float4 Color;
+    Color = tex2D(TextureSampler, texCoord.xy);
+    Color.rgb /= Color.a;
+    Color.rgb = 1 - Color.rgb;
+    Color.rgb *= Color.a;
+    return Color;
 }
 
-float4 MainPS(VertexShaderOutput input) : COLOR
-{
-	return input.Color;
-}
 
-technique BasicColorDrawing
+technique Technique1
 {
-	pass P0
-	{
-		VertexShader = compile VS_SHADERMODEL MainVS();
-		PixelShader = compile PS_SHADERMODEL MainPS();
-	}
-};
+    pass Inverse
+    { 
+        #if SM4
+		        PixelShader = compile ps_4_0 Inverse();
+        #elif SM3
+		        PixelShader = compile ps_3_0 Inverse();
+        #else SM2
+                PixelShader = compile ps_2_0 Inverse();
+        #endif
+    }
+}

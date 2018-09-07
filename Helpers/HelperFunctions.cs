@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,21 @@ namespace ArmadaEngine.Helpers
                 }
             }
             return output;
+        }
+
+        public static void DrawRectangleOutline(SpriteBatch sb, Rectangle rect, Texture2D tex, Color col, int border = 3)
+        {
+            //Left Line
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, border, rect.Height), col);
+
+            //top line
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y, rect.Width + border, border), col);
+
+            //right line
+            sb.Draw(tex, new Rectangle(rect.X + rect.Width, rect.Y, border, rect.Height + border), col);
+
+            //bottom line
+            sb.Draw(tex, new Rectangle(rect.X, rect.Y + rect.Height, rect.Width + border, border), col);
         }
     }
 }

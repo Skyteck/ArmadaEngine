@@ -103,12 +103,12 @@ namespace ArmadaEngine.UI
             {
                 foreach (UIPanel p in PanelList)
                 {
-                    p.ProcessClick(Helpers.InputHelper.MouseScreenPos);
+                    if(p._Showing)
+                    {
+                        p.ProcessClick(Helpers.InputHelper.MouseScreenPos);
+                    }
                 }
             }
-
-
-
         }
 
         internal SpriteFont GetFont(string v)

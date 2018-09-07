@@ -52,7 +52,17 @@ namespace ArmadaEngine.Scenes.Sagey
         const int TargetHeight = 270;
         Matrix Scale;
 
+        int effectIndex = 0;
+        List<Effect> effectsList = new List<Effect>();
+        Effect inverse;
+        Effect virtualBoy;
+        Effect brightness;
+        float brightnessIntensity = 0.5f;
+        Effect ColorFun;
+        float ColorFunMode = 0.1f;
 
+
+        bool shaderOn = false;
         public SageyMainScene(ContentManager c, SceneManager sm, ArmadaCamera ca) : base(c, sm, ca)
         {
             this._Name = "Sagey";
@@ -65,7 +75,7 @@ namespace ArmadaEngine.Scenes.Sagey
             _EventManager = new EventManager(_QuestManager);
             _ItemManager = new Managers.ItemManager(_Content);
             _InvenManager = new Managers.InventoryManager(_ItemManager);
-            _BankManager = new Managers.BankManager(_ItemManager);
+            _BankManager = new Managers.BankManager(_ItemManager, _InvenManager);
             _WorldObjectManager = new Managers.WorldObjectManager(_MapManager, _InvenManager, _Content, player, _ItemManager);
             _NPCManager = new Managers.NPCManager(_MapManager, _Content, player, _DialogManager, _InvenManager, _WorldObjectManager);
             _GatherableManager = new Managers.GatherableManager(_MapManager, _InvenManager, _Content, player);
@@ -116,6 +126,12 @@ namespace ArmadaEngine.Scenes.Sagey
             _InvenManager.AddItem(Enums.ItemID.kItemSlimeGoo, 999999999);
             _InvenManager.AddItem(Enums.ItemID.kItemBucket, 3);
             _BankManager.AddItem(Enums.ItemID.kItemOre, 5);
+            _BankManager.AddItem(Enums.ItemID.kItemBucket, 4);
+
+            _BankManager.AddItem(Enums.ItemID.kItemFish, 1500);
+            _BankManager.AddItem(Enums.ItemID.kItemStrawberry, 1000000);
+            _BankManager.AddItem(Enums.ItemID.kItemSlimeGoo, 999999999);
+            _BankManager.AddItem(Enums.ItemID.kItemBucket, 3);
             LoadGUI();
             //check if save exists
 
@@ -240,6 +256,16 @@ namespace ArmadaEngine.Scenes.Sagey
             path = _Content.RootDirectory + @"\JSON\Dialog_EN_US.json";
             _DialogManager.LoadDialog(path);
 
+            _Content.RootDirectory = "Content/Scenes/Stest";
+            inverse = _Content.Load<Effect>("Inverse");
+            virtualBoy = _Content.Load<Effect>("VirtualBoy");
+            brightness = _Content.Load<Effect>("Brightness");
+            ColorFun = _Content.Load<Effect>("ColorFun");
+            effectsList.Add(inverse);
+            effectsList.Add(virtualBoy);
+            effectsList.Add(brightness);
+            effectsList.Add(ColorFun);
+            _Content.RootDirectory = "Content/Scenes/Sagey";
 
             //_DialogManager.PlayMessage("NPC1");
             //var dialog = System.IO.File.ReadAllText(path);
@@ -345,7 +371,8 @@ namespace ArmadaEngine.Scenes.Sagey
 
         private void ProcessMouse(object gameTime)
         {
-            throw new NotImplementedException();
+            //first check UI
+
         }
 
         private void ProcessKeyboard(GameTime gameTime)
@@ -362,10 +389,47 @@ namespace ArmadaEngine.Scenes.Sagey
             {
                 _UIManager.HideAll();
             }
-            //if (InputHelper.IsKeyPressed(Keys.P))
-            //{
-            //    //SaveGame();
-            //}
+            if(InputHelper.IsKeyPressed(Keys.F6))
+            {
+                shaderOn = !shaderOn;
+            }
+            if(InputHelper.IsKeyPressed(Keys.F7))
+            {
+                effectIndex++;
+                if(effectIndex == effectsList.Count)
+                {
+                    effectIndex = 0;
+                }
+            }
+
+            if (InputHelper.IsKeyPressed(Keys.F9))
+            {
+                brightnessIntensity += 0.1f;
+                if (brightnessIntensity > 1.0f)
+                {
+                    brightnessIntensity = 1.0f;
+                }
+            }
+            else if (InputHelper.IsKeyPressed(Keys.F8))
+            {
+                brightnessIntensity -= 0.1f;
+                if (brightnessIntensity < -1.0f)
+                {
+                    brightnessIntensity = -1.0f;
+                }
+            }
+
+            if (InputHelper.IsKeyPressed(Keys.F10))
+            {
+                if(ColorFunMode == 0.1f)
+                {
+                    ColorFunMode = 0.2f;
+                }
+                else
+                {
+                    ColorFunMode = 0.1f;
+                }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch, Rectangle b)
@@ -373,13 +437,26 @@ namespace ArmadaEngine.Scenes.Sagey
             base.Draw(spriteBatch, b);
 
 
-            spriteBatch.Begin(SpriteSortMode.Deferred,
+            spriteBatch.Begin(SpriteSortMode.Immediate,
                         BlendState.AlphaBlend,
                         null,
                         null,
                         null,
                         null,
                         _Camera.GetTransform());
+
+            if (shaderOn)
+            {
+                effectsList[effectIndex].Techniques[0].Passes[0].Apply();
+                if(effectsList[effectIndex].Name == "Brightness")
+                {
+                    effectsList[effectIndex].Parameters["Intensity"].SetValue(brightnessIntensity);
+                }
+                else if (effectsList[effectIndex].Name == "ColorFun")
+                {
+                    effectsList[effectIndex].Parameters["Mode"].SetValue(ColorFunMode);
+                }
+            }
 
             _MapManager.Draw(spriteBatch, _Camera._Viewport);
 
@@ -400,7 +477,11 @@ namespace ArmadaEngine.Scenes.Sagey
 
             //base.Draw(gt);
             spriteBatch.End();
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate);
+            if (shaderOn)
+            {
+                effectsList[effectIndex].Techniques[0].Passes[0].Apply();
+            }
             _UIManager.Draw(spriteBatch);
             spriteBatch.DrawString(font, _PlayerManager.currentInteracttext, new Vector2(100, 100), Color.White);
             spriteBatch.End();

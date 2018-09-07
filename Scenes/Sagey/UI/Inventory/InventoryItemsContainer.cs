@@ -11,7 +11,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Inventory
 {
     class InventoryItemsContainer : ArmadaEngine.UI.UIListContainer
     {
-        public List<InventoryListItem> InvenItems = new List<InventoryListItem>();
+        public List<ItemListItem> InvenItems = new List<ItemListItem>();
 
         public InventoryItemsContainer(UIManager uim) : base(uim)
         {
@@ -20,7 +20,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Inventory
 
         public void SetItems(List<GameObjects.ItemBundle> items)
         {
-            foreach(InventoryListItem i in InvenItems)
+            foreach(ItemListItem i in InvenItems)
             {
                 i.Reset();
             }

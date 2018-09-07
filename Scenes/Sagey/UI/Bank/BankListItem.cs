@@ -13,6 +13,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Bank
         public UILabel itemName;
         public UIIcon ItemIcon;
         Texture2D nullTex;
+
         public BankListItem(UIManager uim) : base(uim)
         {
             _Show = false;

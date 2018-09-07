@@ -19,13 +19,14 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         public List<ItemSlot> itemSlots;
         public Item _SelectedItem;
         public int _Capacity = 500;
-
+        InventoryManager _InventoryManager;
         
 
-        public BankManager(ItemManager IM)
+        public BankManager(ItemManager IM, InventoryManager InvM)
         {
             _ItemManager = IM;
             itemSlots = new List<ItemSlot>();
+            _InventoryManager = InvM;
         }
 
         public void AddItem(Enums.ItemID itemType, int amount = 1)
@@ -71,40 +72,12 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
             }
         }
 
-        //public void SelectItem(Vector2 pos)
-        //{
-        //    foreach (InventorySlot item in itemSlots)
-        //    {
-        //        if (item.myRect.Contains(pos))
-        //        {
-        //            _SelectedItem = item.ItemInSlot;
-        //        }
-        //    }
-        //}
-
-        //public void SelectItem(Item item)
-        //{
-        //    foreach (InventorySlot itemSlot in itemSlots)
-        //    {
-        //        if (itemSlot.ItemInSlot == item)
-        //        {
-        //            _SelectedItem = itemSlot.ItemInSlot;
-        //            return;
-        //        }
-        //    }
-        //}
-
-        //public Item checkClicks(Vector2 pos)
-        //{
-        //    foreach (InventorySlot item in itemSlots)
-        //    {
-        //        if (item.myRect.Contains(pos))
-        //        {
-        //            return item.ItemInSlot;
-        //        }
-        //    }
-        //    return null;
-        //}
+        public void ToInventory(Enums.ItemID id, int amount = 1)
+        {
+            _InventoryManager.AddItem(id, amount);
+            RemoveItem(id, amount);
+            OnItemRemoved(_ItemManager.GetItem(id)._Name);
+        }
 
         public void RemoveItem(Enums.ItemID itemType, int amount = 1)
         {
@@ -167,11 +140,13 @@ namespace ArmadaEngine.Scenes.Sagey.Managers
         private void OnItemBanked(string itemName)
         {
             ItemBankedEvent?.Invoke(Enums.EventTypes.kEventItemBanked, itemName);
+            OnBankChanged();
         }
 
         private void OnItemRemoved(string itemName)
         {
             ItemRemovedEvent?.Invoke(Enums.EventTypes.kEventItemRemoved, itemName);
+            OnBankChanged();
         }
 
         private void OnBankChanged()

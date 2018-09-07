@@ -12,6 +12,17 @@ namespace ArmadaEngine.UI
     {
         Texture2D _BG;
 
+        Texture2D _DebugTex;
+        public bool debugMode = false;
+        public bool _Selected = false;
+        public Rectangle ListRect
+        {
+            get
+            {
+                return new Rectangle((int)this._Position.X, (int)this._Position.Y, (int)this._Size.X, (int)this._Size.Y);
+            }
+        }
+
         public UIListItem(UIManager uim) : base(uim)
         {
 
@@ -20,6 +31,7 @@ namespace ArmadaEngine.UI
         public override void LoadContent(string texName)
         {
             _BG = _UIManager.GetTexture(texName);
+            _DebugTex = _UIManager.GetTexture("edgeTex");
             base.LoadContent(texName);
         }
 
@@ -28,6 +40,11 @@ namespace ArmadaEngine.UI
             if(_BG != null)
             {
                 sb.Draw(_BG, this._Position, Color.White);
+            }
+
+            if(debugMode || _Selected)
+            {
+                Helpers.HelperFunctions.DrawRectangleOutline(sb, this.ListRect, _DebugTex, Color.White, 2);
             }
             base.Draw(sb);
         }

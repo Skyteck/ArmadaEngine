@@ -11,7 +11,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Bank
 {
     class BankItemsContainer : ArmadaEngine.UI.UIListContainer
     {
-        public List<BankListItem> InvenItems = new List<BankListItem>();
+        public List<Inventory.ItemListItem> InvenItems = new List<Inventory.ItemListItem>();
 
         public BankItemsContainer(UIManager uim) : base(uim)
         {
@@ -20,7 +20,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Bank
 
         public void SetItems(List<GameObjects.ItemBundle> items)
         {
-            foreach(BankListItem i in InvenItems)
+            foreach(Inventory.ItemListItem i in InvenItems)
             {
                 i.Reset();
             }

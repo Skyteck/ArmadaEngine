@@ -105,11 +105,13 @@
     <Compile Include="Scenes\Sagey\UI\Bank\BankItemsContainer.cs" />
     <Compile Include="Scenes\Sagey\UI\Bank\BankListItem.cs" />
     <Compile Include="Scenes\Sagey\UI\Bank\BankPanel.cs" />
+    <Compile Include="Scenes\Sagey\UI\Crafting\CraftingPanel.cs" />
     <Compile Include="Scenes\Sagey\UI\Inventory\InventoryItemsContainer.cs" />
     <Compile Include="Scenes\Sagey\UI\Inventory\InventoryListItem.cs" />
     <Compile Include="Scenes\Sagey\UI\Inventory\InventoryPanel.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\Stest\StestScene.cs" />
     <Compile Include="Scenes\TestScenes\ParticleTestScene.cs" />
     <Compile Include="Scenes\TestScenes\SceneTwo.cs" />
     <Compile Include="Scenes\TestScenes\TestScene.cs" />
@@ -132,17 +134,18 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="TiledSharp">
-      <HintPath>..\..\Sagey\ExtendedTest\packages\TiledSharp\TiledSharp.dll</HintPath>
+      <HintPath>..\TiledSharp-0.15\TiledSharp\bin\Debug\TiledSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Art\BuildingRect.png" />
     <Content Include="Content\Art\edgeTex.png" />
+    <Content Include="Content\Art\GenericBG.png" />
     <Content Include="Content\Art\Player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -195,6 +198,9 @@
     <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg.png" />
     <Content Include="Content\Scenes\Sagey\Tilemaps\ggggg2.png" />
     <Content Include="Content\Scenes\Sagey\Tilemaps\rules.txt" />
+    <Content Include="Content\Scenes\Stest\Brightness.fx" />
+    <Content Include="Content\Scenes\Stest\ColorFun.fx" />
+    <Content Include="Content\Scenes\Stest\VirtualBoy.fx" />
     <Content Include="Content\Scenes\Stest\Inverse.fx" />
     <Content Include="Icon.ico" />
   </ItemGroup>
@@ -238,7 +244,6 @@
   <ItemGroup>
     <Folder Include="Audio\" />
     <Folder Include="Content\Art\Particles\" />
-    <Folder Include="Content\Fonts\" />
     <Folder Include="Scenes\Sagey\GameObjects\UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

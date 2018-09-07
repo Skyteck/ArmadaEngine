@@ -21,6 +21,7 @@ namespace ArmadaEngine
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             this.Window.AllowUserResizing = true;
+            this.graphics.GraphicsProfile = GraphicsProfile.HiDef;
         }
 
         /// <summary>
@@ -68,8 +69,12 @@ namespace ArmadaEngine
 
             Scenes.Sagey.SageyMainScene _sagey = new Scenes.Sagey.SageyMainScene(Content, _SM, _Camera);
             _SM.AddScene(_sagey);
-            _SM.ActivateScene("Sagey");
+            //_SM.ActivateScene("Sagey");
 
+            Scenes.Stest.StestScene _sscene = new Scenes.Stest.StestScene(Content, _SM);
+            _SM.AddScene(_sscene);
+            //_SM.ActivateScene("Shader test");
+            _SM.ActivateScene("Sagey");
             _Camera._Position = new Vector2(GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2);
         }
 
@@ -89,7 +94,7 @@ namespace ArmadaEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
 
             // TODO: Add your update logic here

@@ -8,12 +8,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace ArmadaEngine.Scenes.Sagey.UI.Inventory
 {
-    class InventoryListItem : UIListItem
+    class ItemListItem : UIListItem
     {
         public UILabel itemName;
         public UIIcon ItemIcon;
         Texture2D nullTex;
-        public InventoryListItem(UIManager uim) : base(uim)
+        public Enums.ItemID _ItemID;
+        public ItemListItem(UIManager uim) : base(uim)
         {
             _Show = false;
         }
@@ -65,6 +66,7 @@ namespace ArmadaEngine.Scenes.Sagey.UI.Inventory
                 itemName.OffsetPos.X = (int)((this._Size.X / 2) - (labelSize.X / 2));
             }
             ItemIcon._Texture = i.ItemInSlot.itemtexture;
+            _ItemID = i.ItemInSlot._ID;
             _Show = true;
         }
     }
